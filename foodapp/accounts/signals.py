@@ -5,7 +5,7 @@ from .models import User, UserProfile
 
 @receiver(post_save, sender=User)
 def post_save_create_profile_receiver(sender, instance, created, **kwargs):
-    print(created)
+    print('after model saved using django signal')
     if created:
         UserProfile.objects.create(user=instance)
     else:
@@ -19,5 +19,6 @@ def post_save_create_profile_receiver(sender, instance, created, **kwargs):
 
 @receiver(pre_save, sender=User)
 def pre_save_profile_receiver(sender, instance, **kwargs):
+    print("saving")
     pass
 # post_save.connect(post_save_create_profile_receiver, sender=User)
